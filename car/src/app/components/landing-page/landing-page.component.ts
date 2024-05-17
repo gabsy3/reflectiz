@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -8,28 +8,29 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { BuyerInfoService } from '../../services/buyer-info.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatSelectModule,CommonModule],
+  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatSelectModule, CommonModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
   providers: [provideNativeDateAdapter()]
 })
 
 export class LandingPageComponent implements OnInit {
-  constructor(private buyerInfoService: BuyerInfoService) {}
+  constructor(private buyerInfoService: BuyerInfoService,private toastr: ToastrService) { }
   hobbies: string[] = [];
   motorType: string[] = [];
-  gender : string[] = [];
+  gender: string[] = [];
 
   formDetails = new FormGroup({
     fullname: new FormControl<string>('', Validators.required),
     gender: new FormControl<string>('', Validators.required),
-    email: new FormControl<string>('', [Validators.required,Validators.email]),
-    birthDate: new FormControl('', [Validators.required,this.checkDateNotGratherThenToday()]),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    birthDate: new FormControl('', [Validators.required, this.buyerInfoService.checkDateNotGratherThenToday()]),
     location: new FormGroup({
       address: new FormControl<string>('', Validators.required),
       city: new FormControl<string>('', Validators.required),
@@ -45,6 +46,8 @@ export class LandingPageComponent implements OnInit {
     this.formDetails.markAllAsTouched();
     if (this.formDetails.valid) {
       this.buyerInfoService.sendRequset(this.formDetails);
+      this.toastr.success('the request was sent and a mail with match will be sent to you.','success');
+      this.formDetails.reset();
     }
   }
   ngOnInit(): void {
@@ -52,23 +55,6 @@ export class LandingPageComponent implements OnInit {
     this.hobbies = ['skate', 'surf'];
     this.motorType = ['electric', 'fuel'];
   }
- 
-  checkDateNotGratherThenToday(): ValidatorFn {
-    return (control:AbstractControl) : ValidationErrors | null => {
-        let today = new Date();
-        const value = control.value;
 
-        if (!value) {
-            return null;
-        }
 
-        if(control.value > today){
-          return {
-            isDateNotGratherThenToday: true
-          };
-        } 
-        return null;
-        
-    }
-}
 }
