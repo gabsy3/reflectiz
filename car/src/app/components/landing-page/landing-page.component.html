@@ -1,1 +1,47 @@
+<form [formGroup]="formDetails" (ngSubmit)="saveDetails()">
 
+    <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input matInput type="text" formControlName="fullname" [(ngModel)]="formDetails.controls.fullname.value">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <input matInput type="text" formControlName="gender" [(ngModel)]="formDetails.controls.gender.value">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" [(ngModel)]="formDetails.controls.email.value">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>BirthDate</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate"
+            [(ngModel)]="formDetails.controls.birthDate.value">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="location" [formGroup]="formDetails.controls.location">
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput type="text" formControlName="address"
+                [(ngModel)]="formDetails.controls.location.controls.address.value">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput type="text" formControlName="city"
+                [(ngModel)]="formDetails.controls.location.controls.city.value">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Country</mat-label>
+            <input matInput type="text" formControlName="country"
+                [(ngModel)]="formDetails.controls.location.controls.country.value">
+        </mat-form-field>
+    </div>
+
+    <button mat-flat-button color="primary">Send</button>
+</form>
