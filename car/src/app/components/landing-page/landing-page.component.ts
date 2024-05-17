@@ -19,21 +19,21 @@ import { IbuyerInfo } from '../../models/buyer-info.model';
 })
 
 export class LandingPageComponent implements OnInit {
-  hobbies: any = [];
-
+  hobbies: string[] = [];
+  motorType: string[] = [];
   formDetails = new FormGroup({
     fullname: new FormControl<string>('', Validators.required),
     gender: new FormControl<string>('', Validators.required),
     email: new FormControl<string>('', Validators.required),
     birthDate: new FormControl('', Validators.required),
     location: new FormGroup({
-      address: new FormControl<string>('', Validators.required),
+      address: new FormControl<string>('',Validators.required),
       city: new FormControl<string>('', Validators.required),
       country: new FormControl<string>('', Validators.required),
     }),
     hobbies: new FormControl<string[]>([], Validators.required),
     favoriteColor: new FormControl('', Validators.required),
-    amountOfSeats: new FormControl('', Validators.required),
+    amountOfSeats: new FormControl('', [Validators.required,Validators.min(2),Validators.max(7)]),
     motorType: new FormControl('', Validators.required),
   });
 
@@ -41,6 +41,7 @@ export class LandingPageComponent implements OnInit {
     console.log(this.formDetails);
   }
   ngOnInit(): void {
-    this.hobbies = ['test1','test2']
+    this.hobbies = ['skate','surf'];
+    this.motorType = ['electric','fuel']
   }
 }

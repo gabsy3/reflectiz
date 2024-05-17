@@ -43,14 +43,30 @@
         </mat-form-field>
     </div>
 
-      <mat-form-field>
+    <mat-form-field>
         <mat-label>Hobbies</mat-label>
         <mat-select [formControl]="formDetails.controls.hobbies" multiple>
-          @for (item of hobbies; track item) {
+            @for (item of hobbies; track item) {
             <mat-option [value]="item">{{item}}</mat-option>
-          }
+            }
         </mat-select>
-      </mat-form-field>
+    </mat-form-field>
+
+    <input type="color" [formControl]="formDetails.controls.favoriteColor">
+
+    <mat-form-field>
+        <mat-label>Amount of seats</mat-label>
+        <input matInput type="number" formControlName="amountOfSeats" [(ngModel)]="formDetails.controls.amountOfSeats.value">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Motor type</mat-label>
+        <mat-select [formControl]="formDetails.controls.motorType">
+            @for (item of motorType; track item) {
+            <mat-option [value]="item">{{item}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
 
     <button mat-flat-button color="primary">Send</button>
 </form>
