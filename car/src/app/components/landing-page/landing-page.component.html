@@ -43,5 +43,14 @@
         </mat-form-field>
     </div>
 
+      <mat-form-field>
+        <mat-label>Hobbies</mat-label>
+        <mat-select [formControl]="formDetails.controls.hobbies" multiple>
+          @for (item of hobbies; track item) {
+            <mat-option [value]="item">{{item}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
     <button mat-flat-button color="primary">Send</button>
 </form>

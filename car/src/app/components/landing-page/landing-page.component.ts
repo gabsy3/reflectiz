@@ -5,19 +5,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import { IbuyerInfo } from '../../models/buyer-info.model';
 
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule,MatDatepickerModule],
+  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule,MatDatepickerModule,MatSelectModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
   providers: [provideNativeDateAdapter()]
 })
 
 export class LandingPageComponent implements OnInit {
+  hobbies: any = [];
+
   formDetails = new FormGroup({
     fullname: new FormControl<string>('', Validators.required),
     gender: new FormControl<string>('', Validators.required),
@@ -28,7 +31,7 @@ export class LandingPageComponent implements OnInit {
       city: new FormControl<string>('', Validators.required),
       country: new FormControl<string>('', Validators.required),
     }),
-    hobbies: new FormControl('', Validators.required),
+    hobbies: new FormControl<string[]>([], Validators.required),
     favoriteColor: new FormControl('', Validators.required),
     amountOfSeats: new FormControl('', Validators.required),
     motorType: new FormControl('', Validators.required),
@@ -38,6 +41,6 @@ export class LandingPageComponent implements OnInit {
     console.log(this.formDetails);
   }
   ngOnInit(): void {
-    
+    this.hobbies = ['test1','test2']
   }
 }
