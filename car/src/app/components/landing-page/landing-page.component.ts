@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -28,14 +28,14 @@ export class LandingPageComponent implements OnInit {
     fullname: new FormControl<string>('', Validators.required),
     gender: new FormControl<string>('', Validators.required),
     email: new FormControl<string>('', [Validators.required,Validators.email]),
-    birthDate: new FormControl('', Validators.required),
+    birthDate: new FormControl('', [Validators.required,this.checkDateNotGratherThenToday()]),
     location: new FormGroup({
       address: new FormControl<string>('', Validators.required),
       city: new FormControl<string>('', Validators.required),
       country: new FormControl<string>('', Validators.required),
     }),
     hobbies: new FormControl<string[]>([], Validators.required),
-    favoriteColor: new FormControl('', Validators.required),
+    favoriteColor: new FormControl('#000000', Validators.required),
     amountOfSeats: new FormControl('', [Validators.required, Validators.min(2), Validators.max(7)]),
     motorType: new FormControl('', Validators.required),
   });
@@ -50,6 +50,24 @@ export class LandingPageComponent implements OnInit {
     this.gender = ['male', 'female'];
     this.hobbies = ['skate', 'surf'];
     this.motorType = ['electric', 'fuel'];
-    
   }
+ 
+  checkDateNotGratherThenToday(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+        let today = new Date();
+        const value = control.value;
+
+        if (!value) {
+            return null;
+        }
+
+        if(control.value > today){
+          return {
+            isDateNotGratherThenToday: true
+          };
+        } 
+        return null;
+        
+    }
+}
 }

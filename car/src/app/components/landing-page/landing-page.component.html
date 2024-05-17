@@ -60,7 +60,10 @@
                     </mat-select>
                 </mat-form-field>
 
-                <input type="color" [formControl]="formDetails.controls.favoriteColor">
+                <input type="color" [formControl]="formDetails.controls.favoriteColor" formControlName="favoriteColor">
+                @if(!formDetails.controls.favoriteColor.value){
+                    <span>color field required</span>
+                }
 
                 <mat-form-field>
                     <mat-label>Amount of seats</mat-label>
