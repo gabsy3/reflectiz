@@ -1,86 +1,88 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
+        <div class="col-12 p-5">
+            <h2>Form Information</h2>
             <form [formGroup]="formDetails" (ngSubmit)="saveDetails()">
-
-                <mat-form-field>
-                    <mat-label>Full Name</mat-label>
-                    <input matInput type="text" formControlName="fullname"
-                        [(ngModel)]="formDetails.controls.fullname.value">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Gender</mat-label>
-                    <mat-select [formControl]="formDetails.controls.gender">
-                        @for (item of gender; track item) {
-                        <mat-option [value]="item">{{item}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email" [(ngModel)]="formDetails.controls.email.value">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>BirthDate</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="birthDate"
-                        [(ngModel)]="formDetails.controls.birthDate.value">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-
-                <div class="location" [formGroup]="formDetails.controls.location">
+                <div class="d-flex flex-column">
                     <mat-form-field>
-                        <mat-label>Address</mat-label>
-                        <input matInput type="text" formControlName="address"
-                            [(ngModel)]="formDetails.controls.location.controls.address.value">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput type="text" formControlName="fullname"
+                            [(ngModel)]="formDetails.controls.fullname.value">
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label>City</mat-label>
-                        <input matInput type="text" formControlName="city"
-                            [(ngModel)]="formDetails.controls.location.controls.city.value">
+                        <mat-label>Gender</mat-label>
+                        <mat-select [formControl]="formDetails.controls.gender">
+                            @for (item of gender; track item) {
+                            <mat-option [value]="item">{{item}}</mat-option>
+                            }
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field>
-                        <mat-label>Country</mat-label>
-                        <input matInput type="text" formControlName="country"
-                            [(ngModel)]="formDetails.controls.location.controls.country.value">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email"
+                            [(ngModel)]="formDetails.controls.email.value">
                     </mat-form-field>
-                </div>
 
-                <mat-form-field>
-                    <mat-label>Hobbies</mat-label>
-                    <mat-select [formControl]="formDetails.controls.hobbies" multiple>
-                        @for (item of hobbies; track item) {
-                        <mat-option [value]="item">{{item}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>BirthDate</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="birthDate"
+                            [(ngModel)]="formDetails.controls.birthDate.value">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
 
-                <input type="color" [formControl]="formDetails.controls.favoriteColor" formControlName="favoriteColor">
-                @if(!formDetails.controls.favoriteColor.value){
+                    <div class="location d-flex flex-column flex-md-row justify-content-between" [formGroup]="formDetails.controls.location">
+                        <mat-form-field class="w-100 me-3">
+                            <mat-label>Address</mat-label>
+                            <input matInput type="text" formControlName="address"
+                                [(ngModel)]="formDetails.controls.location.controls.address.value">
+                        </mat-form-field>
+                        <mat-form-field class="w-100 me-3">
+                            <mat-label>City</mat-label>
+                            <input matInput type="text" formControlName="city"
+                                [(ngModel)]="formDetails.controls.location.controls.city.value">
+                        </mat-form-field>
+                        <mat-form-field class="w-100">
+                            <mat-label>Country</mat-label>
+                            <input matInput type="text" formControlName="country"
+                                [(ngModel)]="formDetails.controls.location.controls.country.value">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-label>Hobbies</mat-label>
+                        <mat-select [formControl]="formDetails.controls.hobbies" multiple>
+                            @for (item of hobbies; track item) {
+                            <mat-option [value]="item">{{item}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <input type="color" [formControl]="formDetails.controls.favoriteColor"
+                        formControlName="favoriteColor">
+                    @if(!formDetails.controls.favoriteColor.value){
                     <span>color field required</span>
-                }
+                    }
 
-                <mat-form-field>
-                    <mat-label>Amount of seats</mat-label>
-                    <input matInput type="number" formControlName="amountOfSeats"
-                        [(ngModel)]="formDetails.controls.amountOfSeats.value">
-                </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Amount of seats</mat-label>
+                        <input matInput type="number" formControlName="amountOfSeats"
+                            [(ngModel)]="formDetails.controls.amountOfSeats.value">
+                    </mat-form-field>
 
-                <mat-form-field>
-                    <mat-label>Motor type</mat-label>
-                    <mat-select [formControl]="formDetails.controls.motorType">
-                        @for (item of motorType; track item) {
-                        <mat-option [value]="item">{{item}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Motor type</mat-label>
+                        <mat-select [formControl]="formDetails.controls.motorType">
+                            @for (item of motorType; track item) {
+                            <mat-option [value]="item">{{item}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
 
-                <button mat-flat-button color="primary">Send</button>
+                    <button mat-flat-button color="primary" [class.btn-send]="true">Send</button>
+                </div>
             </form>
         </div>
     </div>

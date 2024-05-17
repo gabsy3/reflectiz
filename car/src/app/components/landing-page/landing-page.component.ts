@@ -7,12 +7,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { BuyerInfoService } from '../../services/buyer-info.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatSelectModule],
+  imports: [MatFormFieldModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatSelectModule,CommonModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
   providers: [provideNativeDateAdapter()]
