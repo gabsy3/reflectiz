@@ -22,11 +22,12 @@ export class LandingPageComponent implements OnInit {
   constructor(private buyerInfoService: BuyerInfoService) {}
   hobbies: string[] = [];
   motorType: string[] = [];
+  gender : string[] = [];
 
   formDetails = new FormGroup({
     fullname: new FormControl<string>('', Validators.required),
     gender: new FormControl<string>('', Validators.required),
-    email: new FormControl<string>('', Validators.required),
+    email: new FormControl<string>('', [Validators.required,Validators.email]),
     birthDate: new FormControl('', Validators.required),
     location: new FormGroup({
       address: new FormControl<string>('', Validators.required),
@@ -40,13 +41,15 @@ export class LandingPageComponent implements OnInit {
   });
 
   saveDetails(): void {
-    console.log(this.formDetails.valid);
+    this.formDetails.markAllAsTouched();
     if (this.formDetails.valid) {
       this.buyerInfoService.sendRequset(this.formDetails);
     }
   }
   ngOnInit(): void {
+    this.gender = ['male', 'female'];
     this.hobbies = ['skate', 'surf'];
-    this.motorType = ['electric', 'fuel']
+    this.motorType = ['electric', 'fuel'];
+    
   }
 }
