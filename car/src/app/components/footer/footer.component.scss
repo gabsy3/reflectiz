@@ -1,7 +1,10 @@
-:host{
-    footer{
-        height:50px;
+:host {
+    footer {
+        height: 2.5rem;
         background: #00254a;
         color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 }
