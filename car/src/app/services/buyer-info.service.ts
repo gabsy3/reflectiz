@@ -13,7 +13,12 @@ export class BuyerInfoService {
     window.localStorage.setItem("buyer-info", JSON.stringify(this.arr));
   }
   getDataFromLocalStorage() {
-    return window.localStorage.getItem("buyer-info");
+    let data = window.localStorage.getItem("buyer-info");
+    if(data){
+      data = JSON.parse(data);
+      return data;
+    }
+   return [];
   }
   checkDateNotGratherThenToday(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
