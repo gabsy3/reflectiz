@@ -3,8 +3,8 @@
         <div class="col-12 text-center p-5">
             <h2>Dashboard</h2>
 
-            <h2>Most common hobby</h2>
-            <table mat-table [dataSource]="mostCommonHobbie" class="mat-elevation-z8">
+            <h2 [ngClass]="{'header':true}">Most common hobby</h2>
+            <table mat-table [dataSource]="mostCommonHobbie" class="mat-elevation-z8 mb-3">
                 <ng-container matColumnDef="hobbies">
                     <th mat-header-cell *matHeaderCellDef> hobbies </th>
                     <td mat-cell *matCellDef="let element"> {{mostCommonHobbie}} </td>
@@ -14,8 +14,8 @@
                 <tr mat-row *matRowDef="let row; columns: hobbiesColumn;"></tr>
             </table>
 
-            <h2>motor type by gender</h2>
-            <table mat-table [dataSource]="mostPickedEngine" class="mat-elevation-z8">
+            <h2 [ngClass]="{'header':true}">motor type by gender</h2>
+            <table mat-table [dataSource]="mostPickedEngine" class="mat-elevation-z8 mb-3">
                 <ng-container matColumnDef="motorType">
                     <th mat-header-cell *matHeaderCellDef> motorType </th>
                     <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
@@ -29,7 +29,7 @@
                 <tr mat-row *matRowDef="let row; columns: motorTypeByGenderColumn;"></tr>
             </table>
 
-            <h2>City with most visitors from</h2>
+            <h2 [ngClass]="{'header':true}">City with most visitors from</h2>
             <table mat-table [dataSource]="cityWithMostVisitors" class="mat-elevation-z8">
                 <ng-container matColumnDef="city">
                     <th mat-header-cell *matHeaderCellDef> city </th>

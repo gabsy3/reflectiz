@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { BuyerInfoService } from '../../services/buyer-info.service';
 import { MatTableModule } from '@angular/material/table';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatTableModule, DatePipe],
+  imports: [MatTableModule, DatePipe,CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

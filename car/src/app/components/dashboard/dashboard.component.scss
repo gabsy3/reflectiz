@@ -1,3 +1,12 @@
-:host{
+:host {
     padding-bottom: 2.5rem;
+
+    .header {
+        background: #ccc;
+        margin: 0;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding:10px;
+    }
 }
