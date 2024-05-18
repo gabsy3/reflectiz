@@ -6,6 +6,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 })
 export class BuyerInfoService {
   arr: any = [];
+  hobbies = [];
   constructor() { }
 
   sendRequset(formDetails: any) {
@@ -64,11 +65,12 @@ export class BuyerInfoService {
         arr.push(hobby);
       });
     });
-    const hashmap = arr.reduce((acc, val) => {
+    const hobbies = arr.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1
       return acc
     }, {})
-    let res = Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
+    this.hobbies = hobbies;
+    let res = Object.keys(hobbies).reduce((a, b) => hobbies[a] > hobbies[b] ? a : b)
     return [res];
   }
   findMostPickedEngineByGender(mostPickedEngine: any) {
@@ -100,5 +102,8 @@ export class BuyerInfoService {
     },"");
     let res = [{gender:'male',motorType:maleRes},{gender:'female',motorType:femalRes}]
     return res;
+  }
+  getHobbiesForChart(){
+    return this.hobbies;
   }
 }

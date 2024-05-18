@@ -46,6 +46,17 @@ export class DashboardComponent implements OnInit {
     this.cityWithMostVisitors = this.buyerInfoService.findMostVisitedCity(this.mostVisitorsDataSource);
     this.mostCommonHobbie = this.buyerInfoService.findMostCommonHobbie(this.hobbiesDataSource);
     this.mostPickedEngine = this.buyerInfoService.findMostPickedEngineByGender(this.motorTypeByGenderDataSource);
+    this.showPie();
   }
-
+  showPie(){
+    let data = this.buyerInfoService.getHobbiesForChart();
+    let label:any[] = [];
+    let pieData:any[] = [];
+    for(let item in data){
+      label.push(item);
+      pieData.push(data[item])
+    }
+    this.pieChartLabels1 = label;
+    this.pieChartDatasets1[0].data = pieData;
+  }
 }
