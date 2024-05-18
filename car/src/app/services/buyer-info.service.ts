@@ -79,12 +79,12 @@ export class BuyerInfoService {
         arr.push(hobby);
       });
     });
-    const hobbies = arr.reduce((acc, val) => {
+    const hobbies = arr?.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1
       return acc
-    }, {})
+    },[{}])
     this.hobbies = hobbies;
-    let res = Object.keys(hobbies).reduce((a, b) => hobbies[a] > hobbies[b] ? a : b)
+    let res = Object.keys(hobbies)?.reduce((a, b) => hobbies[a] > hobbies[b] ? a : b)
     return [res];
   }
   findMostPickedEngineByGender(mostPickedEngine: any) {
@@ -100,19 +100,19 @@ export class BuyerInfoService {
       }
     })
 
-    const maleMap = maleArr.reduce((acc, val) => {
+    const maleMap = maleArr?.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1;
       return acc
     }, {})
-    let maleRes = Object.keys(maleMap).reduce((a: any, b) => {
+    let maleRes = Object.keys(maleMap)?.reduce((a: any, b) => {
       return maleMap[a] > maleMap[b] ? a : b;
     }, "");
 
-    const femaleMap = femaleArr.reduce((acc, val) => {
+    const femaleMap = femaleArr?.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1;
       return acc
     }, {})
-    let femalRes = Object.keys(femaleMap).reduce((a: any, b) => {
+    let femalRes = Object.keys(femaleMap)?.reduce((a: any, b) => {
       return femaleMap[a] > femaleMap[b] ? a : b;
     }, "");
 
