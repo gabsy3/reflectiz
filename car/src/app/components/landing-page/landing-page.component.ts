@@ -43,16 +43,15 @@ export class LandingPageComponent implements OnInit {
   });
 
   saveDetails(): void {
-    this.formDetails.markAllAsTouched();
+    
     if (this.formDetails.valid) {
       this.buyerInfoService.sendRequset(this.formDetails);
       this.toastr.success('the request was sent and a mail with match will be sent to you.','success');
       this.formDetails.reset();
-      
     }else{
       this.toastr.error('you need to fill all fileds','error');
-      
     }
+    this.formDetails.markAllAsTouched();
   }
   ngOnInit(): void {
     this.gender = ['male', 'female'];
