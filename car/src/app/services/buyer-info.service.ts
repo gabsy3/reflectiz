@@ -7,6 +7,8 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 export class BuyerInfoService {
   arr: any = [];
   hobbies = [];
+  motorType: any[] = [];
+  cities: any = [];
   constructor() { }
 
   sendRequset(formDetails: any) {
@@ -39,6 +41,9 @@ export class BuyerInfoService {
     }
   }
   findMostVisitedCity(mostVisitorsDataSource: any[]) {
+    this.cities = [];
+    let arr: any[] = []
+
     const cityCounts = new Map<string, number>();
     let cityWithMostVisitors = [];
     mostVisitorsDataSource.forEach((visitor: any) => {
@@ -55,6 +60,16 @@ export class BuyerInfoService {
       }
     });
 
+    mostVisitorsDataSource.forEach((visitor: any) => {
+      console.log(visitor.location.city);
+      arr.push(visitor.location.city);
+    });
+
+    const cities = arr.reduce((acc, val) => {
+      acc[val] = (acc[val] || 0) + 1
+      return acc
+    }, {})
+    this.cities = cities;
     cityWithMostVisitors.push(mostVisitorsCity);
     return cityWithMostVisitors;
   }
@@ -76,6 +91,7 @@ export class BuyerInfoService {
   findMostPickedEngineByGender(mostPickedEngine: any) {
     let maleArr: any[] = [];
     let femaleArr: any[] = [];
+    this.motorType = [];
     mostPickedEngine.forEach((item: any) => {
       if (item.gender === 'male') {
         maleArr.push(item.motorType);
@@ -86,24 +102,34 @@ export class BuyerInfoService {
     })
 
     const maleMap = maleArr.reduce((acc, val) => {
-      acc[val] = (acc[val] || 0) + 1
+      acc[val] = (acc[val] || 0) + 1;
+      this.motorType.push([acc])
       return acc
     }, {})
-    let maleRes = Object.keys(maleMap).reduce((a:any, b) => {
+    let maleRes = Object.keys(maleMap).reduce((a: any, b) => {
       return maleMap[a] > maleMap[b] ? a : b;
-    },"");
+    }, "");
 
     const femaleMap = femaleArr.reduce((acc, val) => {
-      acc[val] = (acc[val] || 0) + 1
+      acc[val] = (acc[val] || 0) + 1;
+      this.motorType.push([acc])
       return acc
     }, {})
-    let femalRes = Object.keys(femaleMap).reduce((a:any, b) => {
+    let femalRes = Object.keys(femaleMap).reduce((a: any, b) => {
       return femaleMap[a] > femaleMap[b] ? a : b;
-    },"");
-    let res = [{gender:'male',motorType:maleRes},{gender:'female',motorType:femalRes}]
+    }, "");
+
+
+    let res = [{ gender: 'male', motorType: maleRes }, { gender: 'female', motorType: femalRes }];
     return res;
   }
-  getHobbiesForChart(){
+  getHobbiesForChart() {
     return this.hobbies;
+  }
+  getMotorTypeForChart() {
+    return this.motorType;
+  }
+  getCities() {
+    return this.cities;
   }
 }

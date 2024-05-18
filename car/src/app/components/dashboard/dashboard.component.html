@@ -16,13 +16,13 @@
 
             <h2 [ngClass]="{'header':true}">motor type by gender</h2>
             <table mat-table [dataSource]="mostPickedEngine" class="mat-elevation-z8 mb-3">
-                <ng-container matColumnDef="motorType">
-                    <th mat-header-cell *matHeaderCellDef> motorType </th>
+                <ng-container matColumnDef="gender">
+                    <th mat-header-cell *matHeaderCellDef> gender </th>
                     <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="gender">
-                    <th mat-header-cell *matHeaderCellDef> gender </th>
+                <ng-container matColumnDef="motorType">
+                    <th mat-header-cell *matHeaderCellDef> motorType </th>
                     <td mat-cell *matCellDef="let element"> {{element.motorType}} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="motorTypeByGenderColumn"></tr>
@@ -40,13 +40,28 @@
                 <tr mat-row *matRowDef="let row; columns: mostVisitorsColumn;"></tr>
             </table>
         </div>
-        <div class="col-12 col-md-6 text-center p-5">
-            <div id="div1" class="col">
+        <div class="col-12 col-md-6 text-center pt-5">
+            <div class="col-12 d-flex flex-column align-items-center">
                 <h2>Most common hobby</h2>
-                    <canvas baseChart [type]="'pie'" id="canva1" [datasets]="pieChartDatasets1" [labels]="pieChartLabels1"
+                <canvas baseChart [type]="'pie'" width="250px" [datasets]="pieChartDatasets1" [labels]="pieChartLabels1"
                     [options]="pieChartOptions1" [plugins]="pieChartPlugins1" [legend]="pieChartLegend1">
                 </canvas>
             </div>
+
+            <div  class="col-12 d-flex flex-column align-items-center">
+                <h2>Motor type by gender</h2>
+                <canvas baseChart [type]="'pie'" width="250px" [datasets]="pieChartDatasets2" [labels]="pieChartLabels2"
+                    [options]="pieChartOptions1" [plugins]="pieChartPlugins2" [legend]="pieChartLegend2">
+                </canvas>
+            </div>
+
+            <div class="col-12 d-flex flex-column align-items-center">
+                <h2>City with most visitors from</h2>
+                <canvas baseChart [type]="'pie'" width="250px" [datasets]="pieChartDatasets3" [labels]="pieChartLabels3"
+                    [options]="pieChartOptions3" [plugins]="pieChartPlugins3" [legend]="pieChartLegend3">
+                </canvas>
+            </div>
+
         </div>
     </div>
 </div>

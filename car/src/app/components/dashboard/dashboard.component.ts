@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
   motorTypeByGenderDataSource: any;
   mostPickedEngine: { gender: string; motorType: string; }[] = [];
-  motorTypeByGenderColumn: string[] = ['motorType', 'gender'];
+  motorTypeByGenderColumn: string[] = ['gender' ,'motorType' ];
 
   mostVisitorsDataSource: any;
   mostVisitorsColumn: string[] = ['city'];
@@ -40,23 +40,66 @@ export class DashboardComponent implements OnInit {
   public pieChartLegend1 = true;
   public pieChartPlugins1 = [];
 
+  /*chart 2*/
+  public pieChartOptions2: ChartOptions<'pie'> = {
+    responsive: false,
+  };
+  public pieChartLabels2: any = [];
+  public pieChartDatasets2: any = [
+    {
+      data: [],
+    },
+  ];
+  public pieChartLegend2 = true;
+  public pieChartPlugins2 = [];
+
+  /*chart 3*/
+  public pieChartOptions3: ChartOptions<'pie'> = {
+    responsive: false,
+  };
+  public pieChartLabels3: any = [];
+  public pieChartDatasets3: any = [
+    {
+      data: [],
+    },
+  ];
+  public pieChartLegend3 = true;
+  public pieChartPlugins3 = [];
+
   constructor(private buyerInfoService: BuyerInfoService) { }
   ngOnInit(): void {
     this.hobbiesDataSource = this.motorTypeByGenderDataSource = this.mostVisitorsDataSource = this.buyerInfoService.getDataFromLocalStorage();
     this.cityWithMostVisitors = this.buyerInfoService.findMostVisitedCity(this.mostVisitorsDataSource);
     this.mostCommonHobbie = this.buyerInfoService.findMostCommonHobbie(this.hobbiesDataSource);
     this.mostPickedEngine = this.buyerInfoService.findMostPickedEngineByGender(this.motorTypeByGenderDataSource);
-    this.showPie();
+    this.showPie1();
+    //this.showPie2();
+    this.showPie3();
   }
-  showPie(){
+  showPie1() {
     let data = this.buyerInfoService.getHobbiesForChart();
-    let label:any[] = [];
-    let pieData:any[] = [];
-    for(let item in data){
+    console.log(data);
+    let label: any[] = [];
+    let pieData: any[] = [];
+    for (let item in data) {
       label.push(item);
       pieData.push(data[item])
     }
     this.pieChartLabels1 = label;
     this.pieChartDatasets1[0].data = pieData;
+  }
+  showPie2() {
+    
+  }
+  showPie3() {
+    let data = this.buyerInfoService.getCities();
+    let label: any[] = [];
+    let pieData: any[] = [];
+    for (let item in data) {
+      label.push(item);
+      pieData.push(data[item])
+    }
+    this.pieChartLabels3 = label;
+    this.pieChartDatasets3[0].data = pieData;
   }
 }
