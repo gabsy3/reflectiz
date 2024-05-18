@@ -61,7 +61,6 @@ export class BuyerInfoService {
     });
 
     mostVisitorsDataSource.forEach((visitor: any) => {
-      console.log(visitor.location.city);
       arr.push(visitor.location.city);
     });
 
@@ -103,7 +102,6 @@ export class BuyerInfoService {
 
     const maleMap = maleArr.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1;
-      this.motorType.push([acc])
       return acc
     }, {})
     let maleRes = Object.keys(maleMap).reduce((a: any, b) => {
@@ -112,13 +110,14 @@ export class BuyerInfoService {
 
     const femaleMap = femaleArr.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1;
-      this.motorType.push([acc])
       return acc
     }, {})
     let femalRes = Object.keys(femaleMap).reduce((a: any, b) => {
       return femaleMap[a] > femaleMap[b] ? a : b;
     }, "");
 
+    this.motorType.push({male:maleMap})
+    this.motorType.push({female:femaleMap})
 
     let res = [{ gender: 'male', motorType: maleRes }, { gender: 'female', motorType: femalRes }];
     return res;

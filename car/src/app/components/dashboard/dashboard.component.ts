@@ -73,12 +73,11 @@ export class DashboardComponent implements OnInit {
     this.mostCommonHobbie = this.buyerInfoService.findMostCommonHobbie(this.hobbiesDataSource);
     this.mostPickedEngine = this.buyerInfoService.findMostPickedEngineByGender(this.motorTypeByGenderDataSource);
     this.showPie1();
-    //this.showPie2();
+    this.showPie2();
     this.showPie3();
   }
   showPie1() {
     let data = this.buyerInfoService.getHobbiesForChart();
-    console.log(data);
     let label: any[] = [];
     let pieData: any[] = [];
     for (let item in data) {
@@ -89,7 +88,14 @@ export class DashboardComponent implements OnInit {
     this.pieChartDatasets1[0].data = pieData;
   }
   showPie2() {
-    
+    let data = this.buyerInfoService.getMotorTypeForChart();
+    let maleData:any = (data[0].male?.electric || data[0].male?.fuel)
+    let femaleData:any = (data[0]?.female?.electric || data[0]?.female?.fuel)
+   
+    let label: any[] = ['male','female'];
+    this.pieChartLabels2 = label;
+    this.pieChartDatasets2[0].data = [maleData,femaleData];
+    // this.pieChartDatasets1[0].data = pieData;
   }
   showPie3() {
     let data = this.buyerInfoService.getCities();
