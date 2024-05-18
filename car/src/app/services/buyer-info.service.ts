@@ -37,4 +37,24 @@ export class BuyerInfoService {
       return null;
     }
   }
+  findMostVisitedCity(mostVisitorsDataSource: any[]) {
+    const cityCounts = new Map<string, number>();
+    let cityWithMostVisitors = [];
+    mostVisitorsDataSource.forEach((visitor:any) => {
+      const visitorCity = visitor.location.city;
+      const currentCount = cityCounts.get(visitorCity) || 0;
+      cityCounts.set(visitorCity, currentCount + 1);
+    });
+
+    let mostVisitorsCity = '';
+    let mostVisitors = 0;
+    cityCounts.forEach((count, city) => {
+      if (count > mostVisitors) {
+        mostVisitorsCity = city;
+      }
+    });
+    
+    cityWithMostVisitors.push(mostVisitorsCity);
+    return cityWithMostVisitors;
+  }
 }

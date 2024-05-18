@@ -12,8 +12,8 @@ import { DatePipe } from '@angular/common';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  dataSource: any;
-  displayedColumns: string[] = ['favoriteColor', 'birthDate'];
+  hobbiesDataSource: any;
+  hobbiesColumn: string[] = ['hobbies'];
 
   motorTypeByGenderDataSource: any;
   motorTypeByGenderColumn: string[] = ['motorType', 'gender'];
@@ -25,32 +25,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private buyerInfoService: BuyerInfoService) { }
   ngOnInit(): void {
-    this.dataSource = this.motorTypeByGenderDataSource = this.mostVisitorsDataSource = this.buyerInfoService.getDataFromLocalStorage();
-    // this.dataSource.sort((a: { birthDate: string; }, b: { birthDate: string; }) => (a.birthDate > b.birthDate) ? 1 : ((b.birthDate > a.birthDate) ? -1 : 0))
-    // this.motorTypeByGenderDataSource.sort((a: { gender: string; }, b: { gender: string; }) => (a.gender > b.gender) ? 1 : ((b.gender > a.gender) ? -1 : 0))
-    
-    this.findMostVisitedCity();
-   
+    this.hobbiesDataSource = this.motorTypeByGenderDataSource = this.mostVisitorsDataSource = this.buyerInfoService.getDataFromLocalStorage();
+    this.cityWithMostVisitors = this.buyerInfoService.findMostVisitedCity(this.mostVisitorsDataSource);
   }
-  findMostVisitedCity() {
-    const cityCounts = new Map<string, number>();
-
-    this.mostVisitorsDataSource.forEach((visitor:any) => {
-      const visitorCity = visitor.location.city;
-      const currentCount = cityCounts.get(visitorCity) || 0;
-      cityCounts.set(visitorCity, currentCount + 1);
-    });
-
-    let mostVisitorsCity = '';
-    let mostVisitors = 0;
-    cityCounts.forEach((count, city) => {
-      if (count > mostVisitors) {
-        mostVisitorsCity = city;
-        mostVisitors = count;
-      }
-    });
-    
-    this.cityWithMostVisitors.push(mostVisitorsCity);
-    this.mostVisitorsCount = mostVisitors;
-  }
+  
 }
