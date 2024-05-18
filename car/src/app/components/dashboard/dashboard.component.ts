@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 export class DashboardComponent implements OnInit {
   hobbiesDataSource: any;
   hobbiesColumn: string[] = ['hobbies'];
+  mostCommonHobbie: string[] = [];
 
   motorTypeByGenderDataSource: any;
   motorTypeByGenderColumn: string[] = ['motorType', 'gender'];
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.hobbiesDataSource = this.motorTypeByGenderDataSource = this.mostVisitorsDataSource = this.buyerInfoService.getDataFromLocalStorage();
     this.cityWithMostVisitors = this.buyerInfoService.findMostVisitedCity(this.mostVisitorsDataSource);
+    this.mostCommonHobbie = this.buyerInfoService.findMostCommonHobbie(this.hobbiesDataSource);
   }
   
 }

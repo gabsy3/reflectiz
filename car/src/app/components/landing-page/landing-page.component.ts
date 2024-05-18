@@ -56,7 +56,7 @@ export class LandingPageComponent implements OnInit {
   }
   ngOnInit(): void {
     this.gender = ['male', 'female'];
-    this.hobbies = ['skate', 'surf'];
+    this.hobbies = ['skate', 'surf','climbing','watch movie','go to gym'];
     this.motorType = ['electric', 'fuel'];
   }
 
