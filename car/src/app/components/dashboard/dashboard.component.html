@@ -34,10 +34,10 @@
             </table>
 
             <h2>City with most visitors from</h2>
-            <table mat-table [dataSource]="mostVisitorsDataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="cityWithMostVisitors" class="mat-elevation-z8">
                 <ng-container matColumnDef="city">
                     <th mat-header-cell *matHeaderCellDef> city </th>
-                    <td mat-cell *matCellDef="let element"> {{element.location.city}} </td>
+                    <td mat-cell *matCellDef="let element"> {{cityWithMostVisitors}}</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="mostVisitorsColumn"></tr>
