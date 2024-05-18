@@ -98,7 +98,6 @@ export class DashboardComponent implements OnInit {
     let label: any[] = ['male','female'];
     this.pieChartLabels2 = label;
     this.pieChartDatasets2[0].data = [maleData,femaleData];
-    // this.pieChartDatasets1[0].data = pieData;
   }
   showPie3() {
     let data = this.buyerInfoService.getCities();
