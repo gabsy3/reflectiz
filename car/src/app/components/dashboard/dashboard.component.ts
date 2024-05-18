@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { BuyerInfoService } from '../../services/buyer-info.service';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule, DatePipe } from '@angular/common';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartOptions } from 'chart.js';
+
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatTableModule, DatePipe,CommonModule],
+  imports: [MatTableModule, DatePipe, CommonModule, BaseChartDirective,],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -23,8 +26,19 @@ export class DashboardComponent implements OnInit {
   mostVisitorsDataSource: any;
   mostVisitorsColumn: string[] = ['city'];
   cityWithMostVisitors: string[] = [];
-  mostVisitorsCount: number = 0;
-motorType: any;
+
+  /*chart 1*/
+  public pieChartOptions1: ChartOptions<'pie'> = {
+    responsive: false,
+  };
+  public pieChartLabels1: any = [];
+  public pieChartDatasets1: any = [
+    {
+      data: [],
+    },
+  ];
+  public pieChartLegend1 = true;
+  public pieChartPlugins1 = [];
 
   constructor(private buyerInfoService: BuyerInfoService) { }
   ngOnInit(): void {

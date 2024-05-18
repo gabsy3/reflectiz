@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12 text-center p-5">
+        <div class="col-12 col-md-6 text-center p-5">
             <h2>Dashboard</h2>
 
             <h2 [ngClass]="{'header':true}">Most common hobby</h2>
@@ -39,6 +39,14 @@
                 <tr mat-header-row *matHeaderRowDef="mostVisitorsColumn"></tr>
                 <tr mat-row *matRowDef="let row; columns: mostVisitorsColumn;"></tr>
             </table>
+        </div>
+        <div class="col-12 col-md-6 text-center p-5">
+            <div id="div1" class="col">
+                <h2>Most common hobby</h2>
+                    <canvas baseChart [type]="'pie'" id="canva1" [datasets]="pieChartDatasets1" [labels]="pieChartLabels1"
+                    [options]="pieChartOptions1" [plugins]="pieChartPlugins1" [legend]="pieChartLegend1">
+                </canvas>
+            </div>
         </div>
     </div>
 </div>
