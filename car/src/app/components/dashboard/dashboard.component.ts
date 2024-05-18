@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
   showPie2() {
     let data = this.buyerInfoService.getMotorTypeForChart();
     let maleData:any = (data[0].male?.electric || data[0].male?.fuel)
-    let femaleData:any = (data[0]?.female?.electric || data[0]?.female?.fuel)
+    let femaleData:any = (data[1]?.female?.electric || data[1]?.female?.fuel)
    
     let label: any[] = ['male','female'];
     this.pieChartLabels2 = label;
