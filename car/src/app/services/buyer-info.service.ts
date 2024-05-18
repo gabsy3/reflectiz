@@ -87,13 +87,17 @@ export class BuyerInfoService {
       acc[val] = (acc[val] || 0) + 1
       return acc
     }, {})
-    let maleRes = Object.keys(maleMap).reduce((a, b) => maleMap[a] > maleMap[b] ? a : b);
+    let maleRes = Object.keys(maleMap).reduce((a:any, b) => {
+      return maleMap[a] > maleMap[b] ? a : b;
+    },"");
 
     const femaleMap = femaleArr.reduce((acc, val) => {
       acc[val] = (acc[val] || 0) + 1
       return acc
     }, {})
-    let femalRes = Object.keys(femaleMap).reduce((a, b) => femaleMap[a] > femaleMap[b] ? a : b);
+    let femalRes = Object.keys(femaleMap).reduce((a:any, b) => {
+      return femaleMap[a] > femaleMap[b] ? a : b;
+    },"");
     let res = [{gender:'male',motorType:maleRes},{gender:'female',motorType:femalRes}]
     return res;
   }
