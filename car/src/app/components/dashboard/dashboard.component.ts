@@ -81,6 +81,9 @@ export class DashboardComponent implements OnInit {
     let label: any[] = [];
     let pieData: any[] = [];
     for (let item in data) {
+      if(Number(item) === 0 ){
+        continue;
+      }
       label.push(item);
       pieData.push(data[item])
     }
