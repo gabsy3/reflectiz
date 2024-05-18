@@ -15,15 +15,15 @@
             </table>
 
             <h2>motor type by gender</h2>
-            <table mat-table [dataSource]="motorTypeByGenderDataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="mostPickedEngine" class="mat-elevation-z8">
                 <ng-container matColumnDef="motorType">
                     <th mat-header-cell *matHeaderCellDef> motorType </th>
-                    <td mat-cell *matCellDef="let element"> {{element.motorType}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="gender">
                     <th mat-header-cell *matHeaderCellDef> gender </th>
-                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.motorType}} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="motorTypeByGenderColumn"></tr>
                 <tr mat-row *matRowDef="let row; columns: motorTypeByGenderColumn;"></tr>

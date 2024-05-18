@@ -71,4 +71,30 @@ export class BuyerInfoService {
     let res = Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
     return [res];
   }
+  findMostPickedEngineByGender(mostPickedEngine: any) {
+    let maleArr: any[] = [];
+    let femaleArr: any[] = [];
+    mostPickedEngine.forEach((item: any) => {
+      if (item.gender === 'male') {
+        maleArr.push(item.motorType);
+      }
+      if (item.gender === 'female') {
+        femaleArr.push(item.motorType);
+      }
+    })
+
+    const maleMap = maleArr.reduce((acc, val) => {
+      acc[val] = (acc[val] || 0) + 1
+      return acc
+    }, {})
+    let maleRes = Object.keys(maleMap).reduce((a, b) => maleMap[a] > maleMap[b] ? a : b);
+
+    const femaleMap = femaleArr.reduce((acc, val) => {
+      acc[val] = (acc[val] || 0) + 1
+      return acc
+    }, {})
+    let femalRes = Object.keys(femaleMap).reduce((a, b) => femaleMap[a] > femaleMap[b] ? a : b);
+    let res = [{gender:'male',motorType:maleRes},{gender:'female',motorType:femalRes}]
+    return res;
+  }
 }
